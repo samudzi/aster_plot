@@ -313,17 +313,17 @@ looker.plugins.visualizations.add({
       .on('mouseout', tip.hide);
 
     // labels - WIP
-    // svg.selectAll(".label")
-    //     .data(pie(data))
-    //     .enter().append("text")
-    //     .attr("class", "label")
-    //     .attr("x", 5) 
-    //     .attr("dy", 18)
-    //     .append("textPath")
-    //     .attr("startOffset","50%")
-    //     .style("text-anchor","middle")
-    //     .attr("xlink:href",function(d,i){return "#sliceArc_"+i })
-    //     .text(function(d){return d.data.label });
+    svg.selectAll(".label")
+         .data(pie(data))
+         .enter().append("text")
+         .attr("class", "label")
+         .attr("x", 5) 
+         .attr("dy", 18)
+         .append("textPath")
+         .attr("startOffset","50%")
+         .style("text-anchor","middle")
+         .attr("xlink:href",function(d,i){return "#sliceArc_"+i })
+         .text(function(d){return d.data.label });
 
     var outerPath = svg.selectAll(".outlineArc")
       .data(pie(data))
