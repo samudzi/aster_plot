@@ -324,7 +324,8 @@ looker.plugins.visualizations.add({
       .on('mouseout', tip.hide);
 
     // labels - WIP
-    // svg.selectAll(".label")
+    //if (config.label_value == "on")
+    // var label_value =svg.selectAll(".label")
     //     .data(pie(data))
     //     .enter().append("text")
     //     .attr("class", "label")
