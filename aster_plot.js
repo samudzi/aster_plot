@@ -13,6 +13,17 @@ looker.plugins.visualizations.add({
       display: "radio",
       default: "off"
     },
+    label_value: {
+      section: "Data",
+      type: "string",
+      label: "Data Labels",
+      values: [
+        {"On":"on"},
+        {"Off":"off"}
+        ],
+      display: "radio",
+      default: "off"
+    },
     color_range: {
       section: "Format",
       order: 1,
