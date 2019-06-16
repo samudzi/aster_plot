@@ -13,6 +13,7 @@ looker.plugins.visualizations.add({
       display: "radio",
       default: "off"
     },
+    //config for data labels
     label_value: {
       section: "Data",
       type: "string",
