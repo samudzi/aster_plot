@@ -334,7 +334,7 @@ looker.plugins.visualizations.add({
       .on('mouseover', tip.show)
       .on('mouseout', tip.hide);
 
-    // Create the Ouline Arc and also the invisible arcs for labels
+    // Create the Ouline Arc and also the invisible arcs for labels 
     // src: https://www.visualcinnamon.com/2015/09/placing-text-on-arcs.html
     var outerPath = svg.selectAll(".outlineArc")
       .data(pie(data))
