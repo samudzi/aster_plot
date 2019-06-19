@@ -82,7 +82,7 @@ looker.plugins.visualizations.add({
   create: function(element, config) {
 
     var css = `
-      <style> 
+      <style>
         body {
       font: 10px sans-serif;
     }
@@ -113,7 +113,7 @@ looker.plugins.visualizations.add({
       display: none;
     }
 
-    .aster-score { 
+    .aster-score {
       line-height: 1;
       font-weight: bold;
     }
@@ -169,9 +169,9 @@ looker.plugins.visualizations.add({
     this.clearErrors(); // clear any errors from previous updates
 
     // ensure data fit - requires no pivots, exactly 1 dimension_like field, and exactly 2 measure_like fields
-    if (!handleErrors(this, queryResponse, { 
-      min_pivots: 0, max_pivots: 0, 
-      min_dimensions: 1, max_dimensions: 1, 
+    if (!handleErrors(this, queryResponse, {
+      min_pivots: 0, max_pivots: 0,
+      min_dimensions: 1, max_dimensions: 1,
       min_measures: 2, max_measures: 2})) {
       return;
     }
@@ -225,13 +225,13 @@ looker.plugins.visualizations.add({
       data[i].label = data[i][dimension].value; // dimension label
       data[i].score = +data[i][measure_1_score].value; // length of slice (circle radius default is 100)
       data[i].weight = +data[i][measure_2_weight].value; // angle of slice (width of slice)
-      data[i].width = +data[i][measure_2_weight].value; // angle of slice (width of slice) 
+      data[i].width = +data[i][measure_2_weight].value; // angle of slice (width of slice)
       data[i].rendered = data[i][measure_1_score].rendered; // used for tooltip and legened
       all_scores.push(data[i][measure_1_score].value); // used to set max radius
       all_weight.push(data[i][measure_2_weight].value); // used to set custom inner circle size
       dataset_tiny[data[i][dimension].value] = data[i][measure_1_score].rendered;
     }
-    
+
     if (!config.radius) {
       console.log('Radius not set. Defaulting to max score: ' + getMaxOfArray(all_scores))
       config.radius = getMaxOfArray(all_scores)
@@ -334,7 +334,7 @@ looker.plugins.visualizations.add({
       .on('mouseover', tip.show)
       .on('mouseout', tip.hide);
 
-    // Create the Ouline Arc and also the invisible arcs for labels 
+    // Create the Ouline Arc and also the invisible arcs for labels
     // src: https://www.visualcinnamon.com/2015/09/placing-text-on-arcs.html
     var outerPath = svg.selectAll(".outlineArc")
       .data(pie(data))
@@ -495,10 +495,10 @@ looker.plugins.visualizations.add({
               rendered : '100' // testing adding values to legend
             }
           })
-        
+
         // sort alphanumerically
         items = d3.entries(items).sort(function(a,b) { return (a.key < b.key) ? -1 : (a.key > b.key) ? 1 : 0})
-        
+
         // adding rendered values to legend
         for (let i = 0; i < items.length; i++) {
           items[i].value.rendered = dataset_tiny[items[i].key]
@@ -511,7 +511,7 @@ looker.plugins.visualizations.add({
             .attr("y",function(d,i) { return i+"em"})
             .attr("x","1em")
             .text(function(d) { return d.key + ' ' + d.value.rendered});
-        
+
         li.selectAll("circle")
             .data(items,function(d) { return d.key})
             .call(function(d) { d.enter().append("circle")})
@@ -520,9 +520,9 @@ looker.plugins.visualizations.add({
             .attr("cx",0)
             .attr("r","0.4em")
             .style("fill",function(d) { return d.value.color});
-        
+
         // Reposition and resize the box
-        var lbbox = li[0][0].getBBox()  
+        var lbbox = li[0][0].getBBox()
         lb.attr("x",(lbbox.x-legendPadding))
             .attr("y",(lbbox.y-legendPadding))
             .attr("height",(lbbox.height+2*legendPadding))
