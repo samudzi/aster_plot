@@ -272,11 +272,6 @@ looker.plugins.visualizations.add({
     }
 
     var pie = d3.layout.pie()
-      // Turn the pie chart 90 degrees counter clockwise, so it starts at the left. We need this
-      // to properly handle labels flipping
-      // src: https://www.visualcinnamon.com/2015/09/placing-text-on-arcs.html
-      .startAngle(-90 * Math.PI/180)
-      .endAngle(-90 * Math.PI/180 + 2*Math.PI)
       .sort(null)
       .value(function(d) {
         return d.width;
@@ -449,10 +444,15 @@ looker.plugins.visualizations.add({
     function shouldFlipLabel(startAngle, endAngle) {
       return (
         // End angle lies beyond a quarter of a circle (90 degrees or pi/2)
-        endAngle > 90 * Math.PI / 180 &&
+        radiansToDegrees(endAngle) > 90 &&
+        radiansToDegrees(endAngle) < 270 &&
         // Slice "length" is less than 180 degrees
-        (endAngle - startAngle) * 180 / Math.PI < 180
+        radiansToDegrees(endAngle - startAngle) < 180
       );
+    }
+
+    function radiansToDegrees(ragiansAngle) {
+      return ragiansAngle * 180 / Math.PI;
     }
 
     function getMaxOfArray(numArray) {
